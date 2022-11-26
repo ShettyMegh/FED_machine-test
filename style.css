@@ -1,0 +1,264 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* common */
+:root{
+    --max-width:1440px;
+}
+
+.btn{
+    padding: 0.5rem 0.8rem;
+    text-transform: capitalize;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn--green{
+    padding: 0.8rem 1rem;
+    background-color: rgb(15, 180, 4);
+    color: white;
+}
+
+.btn--radius-max{
+    border-radius: 30px;
+}
+
+body{
+    color: white;
+}
+
+
+
+#main{
+    background:linear-gradient(to right,rgba(29, 29, 29, 0.44),rgba(128, 128, 128, 0.45)),  url("/assets/Banner.png") center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+.img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+/* nav */
+.nav__container{
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    padding: 10px;
+    text-transform: capitalize;
+    background-color: transparent;
+    transform: 0.5s all ease-in-out;
+}
+
+.nav-active{
+    color: black;
+    background-color: white;
+}
+.nav__header{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+
+.toggle-btn{
+    background-color: rgb(227, 227, 227);
+    color: black;
+    align-self: center;
+    justify-self: center;
+}
+
+.toggle-btn.btn{
+    padding: 0.3rem 0.5rem;
+}
+
+
+.nav__links{
+    display: flex;
+    gap: 0.8rem;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s all ease-in-out;
+}
+
+.show-links{
+    height: 170px;
+    margin-top: 1rem;
+}
+
+.nav-item{
+    font-size: 1.2rem;
+    margin-left:1rem;
+}
+
+
+/* hero */
+.hero{
+    height: calc(100vh - 48.09px);
+    position: relative;
+}
+.hero__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.hero__container{
+    font-size: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat__container{
+   
+}
+
+.chat-btn{
+    position: fixed;
+    z-index: 12;
+    bottom: 2rem;
+    right: 2rem;
+    height: 30px;
+    width: 30px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.chat-btn img{
+    height: 30px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.chat__screen{
+    display: none;
+    position: fixed;
+    background-color: white;
+    bottom: 6.5rem;
+    right: 1rem;
+    border-radius: 5px;
+    max-width: 90vw;
+    text-transform: capitalize;
+}
+
+.show-chat__screen{
+    display: block;
+}
+
+.chat__welcome{
+    background-color: rgb(109, 110, 189);
+    padding: 2rem 2rem;
+    line-height: 1.5;
+    border-radius: 5px;
+    margin: 0.5rem;
+
+}
+
+.chat__welcome p{
+    color: rgb(234, 234, 234);
+}
+
+.chat__start{
+    color: black;
+    max-width: 72vw;
+    margin: 2rem auto;
+    line-height: 1.5;
+    display: block;
+}
+
+.chat__start button{
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.chat__main{
+    display: block;
+
+}
+
+.chat-conversation{
+    display: none;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 300px;
+    max-height: 300px;
+    overflow: scroll;
+    padding: 2rem 0;
+    margin: 0.5rem;
+
+}
+
+.chat-conversation__box{
+    width: 80%;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.chat-conversation__reply{
+    background-color: rgb(82, 83, 150);
+    align-self: flex-end;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 100% 100%, 95% 85%, 0% 85%);
+}
+
+
+.chat-conversation__user{
+    background-color: rgb(160, 176, 194);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 5% 85%, 0 100%, 0% 75%)
+}
+
+.chat__footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    text-align: center;
+    color: black;
+    border-bottom: 1px solid rgb(126, 126, 126);
+    padding-bottom: 1rem;
+    margin: 1rem 0;
+}
+
+.chat__footer p{
+    font-size: 12px;
+}
+
+.chat-conversation__form{
+    display: grid;
+    grid-template-columns: 2fr auto;
+}
+
+.chat-conversation__form input{
+    border: none;
+    border-radius: 1rem;
+    margin-left: 2rem;
+}
+
+
+
+.chat-conversation__form input:focus{
+   outline: none;
+}
+
+.chat-conversation__btn{
+    background-color: transparent;
+    border: none;
+    margin: 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+ }
+
+
