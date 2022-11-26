@@ -185,12 +185,15 @@ body{
 }
 
 .chat__main{
-    display: block;
-
+    display: none;
+    transition: all .5s ease-in-out;
 }
 
+.show-chat__main{
+    display: block;
+}
 .chat-conversation{
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 2rem;
     min-height: 300px;
