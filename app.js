@@ -9,8 +9,13 @@ toggleBtn.addEventListener("click",function(){
 })
 
 
-//chat
 
+
+/* 
+**************
+chat functionalities
+**************
+*/
 //chat btn click
 const chatBtn = document.querySelector(".chat-btn");
 const chatScreen = document.querySelector(".chat__screen");
@@ -26,7 +31,6 @@ chatStartBtn.addEventListener("click",function(){
     chatMain.classList.add("show-chat__main");
     chatStartBtn.parentElement.style.display="none";
 })
-
 
 
 
@@ -56,8 +60,18 @@ chatForm.addEventListener("submit",function(e){
     if(inpEle.value.trim() ==="") return;
     creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
     inpEle.value = "";
-
+    var fetchConst = setTimeout(()=>{
+        fetchReply();
+    },200)
 })
 
 
+
+//fetch reply from api
+async function fetchReply() {
+    let response = await fetch('https://api.adviceslip.com/advice');
+    let data = await response.text();
+    data = JSON.parse(data);
+    creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+}
 
