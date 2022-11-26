@@ -28,3 +28,21 @@ chatStartBtn.addEventListener("click",function(){
 })
 
 
+
+
+//create and append message box
+function creatAndAppendChatBox(convType,message){
+        const chatBox = document.createElement("div");
+        chatBox.classList.add("chat-conversation__message-container")
+        const chatProfile = (convType === "chat-conversation__reply")?`<div class="chat-conversation__profile"></div>`:"";
+       chatBox.innerHTML =  `
+                ${chatProfile};
+                <article class="chat-conversation__box ${convType}">
+                    ${message.toString()}
+                </article>
+        `
+    chatConv.append(chatBox)
+    chatConv.scrollTop = chatConv.scrollHeight;
+}
+
+
