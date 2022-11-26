@@ -46,3 +46,18 @@ function creatAndAppendChatBox(convType,message){
 }
 
 
+//add user message
+const chatForm = document.querySelector(".chat-conversation__form");
+const chatConv = document.querySelector(".chat-conversation")
+chatForm.addEventListener("submit",function(e){
+    e.preventDefault();
+    const inpEle = document.querySelector("#chat__input")
+    //if input is empty do nothing
+    if(inpEle.value.trim() ==="") return;
+    creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
+    inpEle.value = "";
+
+})
+
+
+
