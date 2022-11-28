@@ -64,13 +64,15 @@ function creatAndAppendChatBox(convType,message){
 //add user message
 const chatForm = document.querySelector(".chat-conversation__form");
 const chatConv = document.querySelector(".chat-conversation")
+const chatTyping = document.querySelector(".chat-typing");
 chatForm.addEventListener("submit",function(e){
     e.preventDefault();
     //if input is empty do nothing
     if(inpEle.value.trim() ==="") return;
-
+    
     creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
     inpEle.value = "";
+    chatTyping.classList.add("chat-typing--active");
     if(flag){
        setTimeout(()=>{
             fetchReply();
@@ -88,6 +90,7 @@ async function fetchReply() {
     let data = await response.text();
     data = JSON.parse(data);
     creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+    chatTyping.classList.remove("chat-typing--active");
     flag = true;
 }
 

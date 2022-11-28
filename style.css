@@ -363,12 +363,18 @@ body{
     align-self: center;
 
 }
-/* 
+
+.chat-typing__container{
+    position: relative;
+    display: block;
+    height: 22px;
+    overflow: hidden;
+}
+
 .chat-typing{
-    display: none;
     position: absolute;
     font-size: 12px;
-    bottom: -100%;
+    bottom: -30px;
     color: white;
     padding: 0.2rem 2rem;
     background-color: rgba(82, 83, 150, 0.496);
@@ -378,9 +384,8 @@ body{
 }
 
 .chat-typing--active{
-    display: block;
     bottom: 0;
-} */
+}
 
 .chat__footer{
     display: flex;
