@@ -30,14 +30,14 @@ let flag = true;
 
 //close chat when click outside of chat
 
-document.body.addEventListener("click",(e)=>{
-    if(e.target == chatBtn){
-        e.stopPropagation()
-        return;
-    }
-    chatBtn.classList.remove("chat-btn--active")
-    chatScreen.classList.remove("show-chat__screen")
-})
+// document.body.addEventListener("click",(e)=>{
+//     if(e.target == chatBtn || e.target == chatScreen){
+//         e.stopPropagation()
+//         return;
+//     }
+//     chatBtn.classList.remove("chat-btn--active")
+//     chatScreen.classList.remove("show-chat__screen")
+// })
 
 
 //chat start
