@@ -34,11 +34,12 @@ body{
 
 
 #main{
-    background:linear-gradient(to right,rgba(29, 29, 29, 0.44),rgba(128, 128, 128, 0.45)),  url("/assets/Banner.png") center center no-repeat;
+    background:linear-gradient(to right,rgba(29, 29, 29, 0.188),rgba(128, 128, 128, 0.45)),  url("./assets/Banner.png") center center no-repeat;
     background-size: cover;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
+    overflow: hidden;
 }
 .img{
     height: 100%;
@@ -100,6 +101,69 @@ body{
 }
 
 
+@media only screen and (min-width:540px){
+    .nav__header {
+        font-size: 1.8rem;
+    }
+
+
+    .nav__links{
+        font-size: 1.5rem;
+    }
+
+    .show-links {
+        height: 200px;
+        margin-left: 2rem;
+    }
+
+    .nav__links .btn{
+        font-size: 1rem;
+        padding: 0.5rem 2.5rem;
+        border-radius: 20px;
+    }
+
+}
+
+@media only screen and (min-width:1000px){
+    .nav-active{
+        background-color: transparent;
+        color: white;
+    }
+    .nav__container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4rem;
+        padding-bottom: 0;
+    }
+    .nav__header {
+        font-size: 1.8rem;
+    }
+
+    .nav__header .toggle-btn{
+        display: none;
+    }
+
+
+    .nav__links{
+        font-size: 1.5rem;
+        height: auto;
+        gap: 3rem;
+        flex-direction: row;
+    }
+
+    .show-links {
+        height: auto;
+    }
+
+    .nav__links .btn{
+        font-size: 1rem;
+    }
+
+}
+
+
+
 /* hero */
 .hero{
     height: calc(100vh - 48.09px);
@@ -111,19 +175,48 @@ body{
     justify-content: center;
     height: 100%;
 }
-.hero__container{
+.hero__heading{
     font-size: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    line-height: 1;
 }
 
-.chat__container{
-   
+
+
+
+
+@media only screen and (min-width:540px){
+    .hero {
+        position: relative;
+    }
+
+    .hero__container{
+        justify-content: flex-start;
+        margin-left: 4rem;
+    }
 }
+
+@media only screen and (min-width:720px){
+    .hero__heading{
+        font-size: 14vh;
+    }
+}
+
+@media only screen and (min-width:1000px){
+    .hero{
+        height: calc(100vh - 114px);
+    }
+    .hero__container{
+        margin-left: 9rem;
+    }
+
+    .hero__heading{
+        font-size: 7rem;
+    }
+}
+
 
 .chat-btn{
-    position: fixed;
+    position: absolute;
     z-index: 12;
     bottom: 2rem;
     right: 2rem;
@@ -133,9 +226,17 @@ body{
     background-color: white;
     border-radius: 50%;
     cursor: pointer;
+    transition: .5s all ease-in-out;
+    background: url("./assets/Sparrow\ Bird.png") center no-repeat white;
+    background-size:30px;
+}
+
+.chat-btn--active{
+    background: url("./assets/close-btn.png") center no-repeat white;
+    background-size:30px;
 }
 .chat-btn img{
-    height: 30px;
+    width: 30px;
     margin: 0 auto;
     position: relative;
     top: 50%;
@@ -144,17 +245,21 @@ body{
 }
 
 .chat__screen{
-    display: none;
-    position: fixed;
+    position: absolute;
     background-color: white;
     bottom: 6.5rem;
-    right: 1rem;
+    right: -90%;
     border-radius: 5px;
-    max-width: 90vw;
+    width: 90%;
+    height: auto;
+    padding: 0.5rem;
+    transition: .5s all ease-in-out;
 }
 
+
+
 .show-chat__screen{
-    display: block;
+    right: 1rem;
 }
 
 .chat__welcome{
@@ -162,7 +267,6 @@ body{
     padding: 2rem 2rem;
     line-height: 1.5;
     border-radius: 5px;
-    margin: 0.5rem;
     text-transform: capitalize;
 
 }
@@ -175,7 +279,7 @@ body{
 
 .chat__start{
     color: black;
-    max-width: 72vw;
+    max-width: 80%;
     margin: 2rem auto;
     line-height: 1.5;
     display: block;
@@ -199,11 +303,12 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 100px;
+    max-height: 200px;
     overflow: scroll;
     padding: 2rem 0;
     margin: 0.5rem;
+    overflow-x: hidden;
 
 }
 
@@ -218,6 +323,20 @@ body{
     display: flex;
     gap: 0.4rem;
     width: 100%;
+    transition: .5s all ease-in-out;
+}
+
+.message-container--left{
+    transform: translateX(-100%);
+}
+
+
+.message-container--right{
+    transform: translateX(100%);
+}
+
+.add-animation{
+    transform: translateX(0);
 }
 
 
@@ -232,7 +351,6 @@ body{
 .chat-conversation__reply{
     background-color: rgb(160, 176, 194);
     clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 5% 85%, 0 100%, 0% 75%);
- 
 }
 
 .chat-conversation__profile{
@@ -286,3 +404,20 @@ body{
  }
 
 
+
+
+ @media only screen and (min-width:550px) {
+    .chat__screen{
+        right: -350px;
+        width: 350px;
+    }
+
+    .show-chat__screen{
+        right: 1rem;
+    }
+    .chat-conversation {
+        min-height: 150px;
+        max-height: 260px;
+    }
+    
+}

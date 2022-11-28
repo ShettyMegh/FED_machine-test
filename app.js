@@ -19,34 +19,45 @@ chat functionalities
 //chat btn click
 const chatBtn = document.querySelector(".chat-btn");
 const chatScreen = document.querySelector(".chat__screen");
-chatBtn.addEventListener("click",function(){
-    chatScreen.classList.toggle("show-chat__screen")
-})
+let flag = true;
+
+    chatBtn.addEventListener("click",function(e){
+        chatBtn.classList.toggle("chat-btn--active")
+        chatScreen.classList.toggle("show-chat__screen")
+    })
+
+
 
 
 //chat start
 const chatStartBtn = document.querySelector("#chat__start__btn")
 const chatMain = document.querySelector(".chat__main")
+const inpEle = document.querySelector("#chat__input")
 chatStartBtn.addEventListener("click",function(){
     chatMain.classList.add("show-chat__main");
+    inpEle.focus();
     chatStartBtn.parentElement.style.display="none";
 })
+
+
 
 
 
 //create and append message box
 function creatAndAppendChatBox(convType,message){
         const chatBox = document.createElement("div");
-        chatBox.classList.add("chat-conversation__message-container")
+        const animType = (convType === "chat-conversation__user")?"message-container--right":"message-container--left";
+        chatBox.classList.add("chat-conversation__message-container",animType)
         const chatProfile = (convType === "chat-conversation__reply")?`<div class="chat-conversation__profile"></div>`:"";
        chatBox.innerHTML =  `
-                ${chatProfile};
+                ${chatProfile}
                 <article class="chat-conversation__box ${convType}">
                     ${message.toString()}
                 </article>
         `
     chatConv.append(chatBox)
     chatConv.scrollTop = chatConv.scrollHeight;
+    addAnimationClass(chatBox,"add-animation")
 }
 
 
@@ -55,14 +66,17 @@ const chatForm = document.querySelector(".chat-conversation__form");
 const chatConv = document.querySelector(".chat-conversation")
 chatForm.addEventListener("submit",function(e){
     e.preventDefault();
-    const inpEle = document.querySelector("#chat__input")
     //if input is empty do nothing
     if(inpEle.value.trim() ==="") return;
     creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
     inpEle.value = "";
-    var fetchConst = setTimeout(()=>{
-        fetchReply();
-    },200)
+    if(flag){
+       setTimeout(()=>{
+            fetchReply();
+        },1000)
+        flag = false;
+    }
+
 })
 
 
@@ -73,5 +87,11 @@ async function fetchReply() {
     let data = await response.text();
     data = JSON.parse(data);
     creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+    flag = true;
 }
 
+
+//add animation
+function addAnimationClass(ele,className){
+    ele.classList.add(className);
+}
