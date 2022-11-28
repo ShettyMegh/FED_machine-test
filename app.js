@@ -28,6 +28,17 @@ let flag = true;
 
 
 
+//close chat when click outside of chat
+
+document.body.addEventListener("click",(e)=>{
+    if(e.target == chatBtn){
+        e.stopPropagation()
+        return;
+    }
+    chatBtn.classList.remove("chat-btn--active")
+    chatScreen.classList.remove("show-chat__screen")
+})
+
 
 //chat start
 const chatStartBtn = document.querySelector("#chat__start__btn")
