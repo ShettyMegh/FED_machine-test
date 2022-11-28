@@ -88,7 +88,6 @@ async function fetchReply() {
     let data = await response.text();
     data = JSON.parse(data);
     creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
-    chatTyping.classList.remove("chat-typing--active");
     flag = true;
 }
 
