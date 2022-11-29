@@ -21,23 +21,19 @@ const chatBtn = document.querySelector(".chat-btn");
 const chatScreen = document.querySelector(".chat__screen");
 let flag = true;
 
-    chatBtn.addEventListener("click",function(e){
-        chatBtn.classList.toggle("chat-btn--active")
-        chatScreen.classList.toggle("show-chat__screen")
-    })
+chatBtn.addEventListener("click",function(e){
+    chatBtn.classList.toggle("chat-btn--active")
+    chatScreen.classList.toggle("show-chat__screen")
+})
 
 
 
 //close chat when click outside of chat
-
-// document.body.addEventListener("click",(e)=>{
-//     if(e.target == chatBtn || e.target == chatScreen){
-//         e.stopPropagation()
-//         return;
-//     }
-//     chatBtn.classList.remove("chat-btn--active")
-//     chatScreen.classList.remove("show-chat__screen")
-// })
+const mainPage = document.querySelector("#main")
+mainPage.addEventListener("click",(e)=>{
+    chatBtn.classList.remove("chat-btn--active")
+    chatScreen.classList.remove("show-chat__screen")
+})
 
 
 //chat start
@@ -83,11 +79,13 @@ chatForm.addEventListener("submit",function(e){
     
     creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
     inpEle.value = "";
-    chatTyping.classList.add("chat-typing--active");
+    setTimeout(()=>{
+        chatTyping.classList.add("chat-typing--active");
+    },1000)
     if(flag){
        setTimeout(()=>{
             fetchReply();
-        },1000)
+        },2000)
         flag = false;
     }
 
@@ -97,12 +95,19 @@ chatForm.addEventListener("submit",function(e){
 
 //fetch reply from api
 async function fetchReply() {
-    let response = await fetch('https://api.adviceslip.com/advice');
-    let data = await response.text();
-    data = JSON.parse(data);
-    creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+    try{
+        let response = await fetch('https://api.adviceslip.com/advice');
+        let data = await response.text();
+        data = JSON.parse(data);
+        creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+    }catch(e){
+        creatAndAppendChatBox("chat-conversation__reply","Server is down")
+    }
+
+
     chatTyping.classList.remove("chat-typing--active");
     flag = true;
+
 }
 
 

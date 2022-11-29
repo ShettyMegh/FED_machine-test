@@ -35,13 +35,14 @@
 body{
     font-family: 'Montserrat', sans-serif;
     color: white;
+    background:linear-gradient(to right,rgba(29, 29, 29, 0.068),rgba(128, 128, 128, 0.116)),  url("./assets/Banner.png") center center no-repeat;
+    background-size: cover;
 }
 
 
 
 #main{
-    background:linear-gradient(to right,rgba(29, 29, 29, 0.068),rgba(128, 128, 128, 0.116)),  url("./assets/Banner.png") center center no-repeat;
-    background-size: cover;
+
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -222,6 +223,7 @@ body{
 }
 
 
+
 .chat-btn{
     position: absolute;
     z-index: 12;
@@ -258,11 +260,11 @@ body{
     position: absolute;
     background-color: white;
     bottom: 6.5rem;
-    right: -90%;
+    right: 1rem;
     border-radius: 5px;
-    width: 90%;
-    height: auto;
-    padding: 0.5rem;
+    max-width: 0;
+    max-height: 0;
+    overflow: hidden;
     transition: .5s all ease-in-out;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -270,7 +272,9 @@ body{
 
 
 .show-chat__screen{
-    right: 1rem;
+    max-height: 900px;
+    max-width: 90%;
+    padding: 0.5rem;
 }
 
 .chat__welcome{
@@ -335,7 +339,7 @@ body{
     display: flex;
     gap: 0.4rem;
     width: 100%;
-    transition: .3s all ease-in-out;
+    transition: .4s all ease-in-out;
 }
 
 .message-container--left{
@@ -376,26 +380,20 @@ body{
 
 }
 
-.chat-typing__container{
-    position: relative;
-    display: block;
-    height: 22px;
-    overflow: hidden;
-}
 
 .chat-typing{
-    position: absolute;
     font-size: 12px;
-    bottom: -30px;
+    max-height: 0;
     color: white;
-    padding: 0.2rem 2rem;
     background-color: rgba(82, 83, 150, 0.496);
     border-radius: 10px;
-    width: fit-content;
-    transition: .8s all ease-in-out;
+    max-width: fit-content;
+    transition: .5s all ease-in-out;
 }
 
 .chat-typing--active{
+    max-height: 40px;
+    padding: 0.2rem 2rem;
     bottom: 0;
 }
 
@@ -445,15 +443,10 @@ body{
 
 
  @media only screen and (min-width:550px) {
-    .chat__screen{
-        right: -350px;
-        width: 350px;
-    }
-
     .show-chat__screen{
-        right: 1rem;
+        max-width: 350px;
     }
-
+    
     .chat__welcome h2{
         font-weight: 500;
     }
@@ -478,13 +471,8 @@ body{
 }
 
 @media only screen and (min-width:950px){
-    .chat__screen{
-        right: -400px;
-        width: 400px;
-    }
-
     .show-chat__screen{
-        right: 1rem;
+        max-width: 400px;
     }
 
 }
