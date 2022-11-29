@@ -51,8 +51,6 @@ chatStartBtn.addEventListener("click",function(){
 
 
 
-
-
 //add user message
 const chatForm = document.querySelector(".chat-conversation__form");
 const chatConv = document.querySelector(".chat-conversation")
@@ -73,11 +71,12 @@ chatForm.addEventListener("submit",function(e){
     if(flag){
         let typingChatBox;
         setTimeout(()=>{
+            //append def message for replying and store the artcile ele in variable
             typingChatBox = creatAndAppendChatBox("chat-conversation__reply","typing...");
-
             setTimeout(()=>{
+                //send stored article ele to fetchReply so that it can be edited when data is fetched
                 fetchReply(typingChatBox);
-            },200)
+            },1000)
         },1000)
 
       
@@ -93,20 +92,38 @@ chatForm.addEventListener("submit",function(e){
 
 //create and append message box
 function creatAndAppendChatBox(convType,message){
-    const chatBox = document.createElement("div");
+    //create outer element
+    const chatEle = document.createElement("div");
+
+    //add proper class according to who's chat
     const animType = (convType === "chat-conversation__user")?"message-container--right":"message-container--left";
-    chatBox.classList.add("chat-conversation__message-container",animType)
+    chatEle.classList.add("chat-conversation__message-container",animType)
+    
+    //if its reply then profile should be there according to design
     const chatProfile = (convType === "chat-conversation__reply")?`<div class="chat-conversation__profile"></div>`:"";
-   chatBox.innerHTML =  `
-            ${chatProfile}
-            <article class="chat-conversation__box ${convType}">
-            </article>
-    `
-chatBox.querySelector("article").innerText = message.toString();
-chatConv.append(chatBox)
-chatConv.scrollTop = chatConv.scrollHeight;
-addAnimationClass(chatBox,"add-animation")
-return chatBox.querySelector("article");
+
+    //add chatbox html inside chatEle
+    chatEle.innerHTML =  `
+                ${chatProfile}
+                <article class="chat-conversation__box ${convType}">
+                </article>
+        `
+    //select added article and append message inside that
+    //html tags are treated as text now
+    chatEle.querySelector("article").innerText = message.toString();
+    //append chatEle to chat conversation
+    chatConv.append(chatEle)
+
+    //make it scroll down by default when new message is added
+    chatConv.scrollTop = chatConv.scrollHeight;
+    //add animation
+    addAnimationClass(chatEle,"add-animation")
+
+    //return chatEle article element
+    //returning is used only for fetchReply
+    //we add "typing..." as def message to "chat reply box" when user send's message, after 1 sec delay
+    //will fetch data from api and that text to the returned article element in fetchReply function
+    return chatEle.querySelector("article");
 }
 
 
