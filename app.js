@@ -21,6 +21,7 @@ const chatBtn = document.querySelector(".chat-btn");
 const chatScreen = document.querySelector(".chat__screen");
 let flag = true;
 
+//toggle chat screen when btn clicked
 chatBtn.addEventListener("click",function(e){
     chatBtn.classList.toggle("chat-btn--active")
     chatScreen.classList.toggle("show-chat__screen")
@@ -50,22 +51,6 @@ chatStartBtn.addEventListener("click",function(){
 
 
 
-//create and append message box
-function creatAndAppendChatBox(convType,message){
-        const chatBox = document.createElement("div");
-        const animType = (convType === "chat-conversation__user")?"message-container--right":"message-container--left";
-        chatBox.classList.add("chat-conversation__message-container",animType)
-        const chatProfile = (convType === "chat-conversation__reply")?`<div class="chat-conversation__profile"></div>`:"";
-       chatBox.innerHTML =  `
-                ${chatProfile}
-                <article class="chat-conversation__box ${convType}">
-                    ${message.toString()}
-                </article>
-        `
-    chatConv.append(chatBox)
-    chatConv.scrollTop = chatConv.scrollHeight;
-    addAnimationClass(chatBox,"add-animation")
-}
 
 
 //add user message
@@ -77,35 +62,71 @@ chatForm.addEventListener("submit",function(e){
     //if input is empty do nothing
     if(inpEle.value.trim() ==="") return;
     
+
+    //append user message in chat screen
     creatAndAppendChatBox("chat-conversation__user",inpEle.value.toString());
+    //set inp value null
     inpEle.value = "";
-    setTimeout(()=>{
-        chatTyping.classList.add("chat-typing--active");
-    },1000)
+    
+
+    //to avoid making unnecessary api call
     if(flag){
-       setTimeout(()=>{
-            fetchReply();
-        },2000)
+        let typingChatBox;
+        setTimeout(()=>{
+            typingChatBox = creatAndAppendChatBox("chat-conversation__reply","typing...");
+
+            setTimeout(()=>{
+                fetchReply(typingChatBox);
+            },200)
+        },1000)
+
+      
         flag = false;
+
     }
 
 })
 
 
 
+
+
+//create and append message box
+function creatAndAppendChatBox(convType,message){
+    const chatBox = document.createElement("div");
+    const animType = (convType === "chat-conversation__user")?"message-container--right":"message-container--left";
+    chatBox.classList.add("chat-conversation__message-container",animType)
+    const chatProfile = (convType === "chat-conversation__reply")?`<div class="chat-conversation__profile"></div>`:"";
+   chatBox.innerHTML =  `
+            ${chatProfile}
+            <article class="chat-conversation__box ${convType}">
+            </article>
+    `
+chatBox.querySelector("article").innerText = message.toString();
+chatConv.append(chatBox)
+chatConv.scrollTop = chatConv.scrollHeight;
+addAnimationClass(chatBox,"add-animation")
+return chatBox.querySelector("article");
+}
+
+
+
+
 //fetch reply from api
-async function fetchReply() {
+async function fetchReply(typingChatBox) {
     try{
         let response = await fetch('https://api.adviceslip.com/advice');
         let data = await response.text();
         data = JSON.parse(data);
-        creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+        // creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+        typingChatBox.innerText = data.slip.advice;
+        console.log(typingChatBox);
     }catch(e){
-        creatAndAppendChatBox("chat-conversation__reply","Server is down")
+        // creatAndAppendChatBox("chat-conversation__reply","Server is down")
+        typingChatBox.innerText = "Server is Down";
+
     }
-
-
-    chatTyping.classList.remove("chat-typing--active");
+    // chatTyping.classList.remove("chat-typing--active");
     flag = true;
 
 }
