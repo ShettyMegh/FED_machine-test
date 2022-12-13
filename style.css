@@ -61,9 +61,7 @@ body{
 }
 
 .nav__container{
-    position: fixed;
     width: 100%;
-    z-index: 10;
     color: rgb(255, 255, 255);
     margin: 0 auto;
     padding: 10px;
@@ -181,7 +179,7 @@ body{
 
 /* hero */
 .hero{
-    height: 100vh;
+    height: calc(100vh - 55px);
     position: relative;
 }
 .hero__container{
@@ -212,12 +210,21 @@ body{
 }
 
 @media only screen and (min-width:720px){
+    .hero{
+        height: calc(100vh - 73px);
+    }
+
     .hero__heading{
         font-size: 14vh;
     }
 }
 
 @media only screen and (min-width:1000px){
+
+    .hero{
+        height: calc(100vh - 117px);
+    }
+
     .hero__container{
         margin-left: 9rem;
     }
