@@ -68,21 +68,16 @@ chatForm.addEventListener("submit",function(e){
     
 
     //to avoid making unnecessary api call
-    if(flag){
-        let typingChatBox;
         setTimeout(()=>{
             //append def message for replying and store the artcile ele in variable
-            typingChatBox = creatAndAppendChatBox("chat-conversation__reply","typing...");
+            chatTyping.classList.add("chat-typing--active");
             setTimeout(()=>{
                 //send stored article ele to fetchReply so that it can be edited when data is fetched
-                fetchReply(typingChatBox);
-            },1000)
-        },1000)
+                fetchReply();
+            },800)
+        },600)
 
-      
-        flag = false;
 
-    }
 
 })
 
@@ -130,21 +125,21 @@ function creatAndAppendChatBox(convType,message){
 
 
 //fetch reply from api
-async function fetchReply(typingChatBox) {
+async function fetchReply() {
+    let typingChatBox;
     try{
         let response = await fetch('https://api.adviceslip.com/advice');
         let data = await response.text();
         data = JSON.parse(data);
-        // creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
+        console.log(data.slip.advice);
+        typingChatBox = creatAndAppendChatBox("chat-conversation__reply",data.slip.advice)
         typingChatBox.innerText = data.slip.advice;
-        console.log(typingChatBox);
     }catch(e){
-        // creatAndAppendChatBox("chat-conversation__reply","Server is down")
+        typingChatBox = creatAndAppendChatBox("chat-conversation__reply","Server is down")
         typingChatBox.innerText = "Server is Down";
 
     }
-    // chatTyping.classList.remove("chat-typing--active");
-    flag = true;
+    chatTyping.classList.remove("chat-typing--active");
 
 }
 

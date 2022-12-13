@@ -386,10 +386,11 @@ body{
 
 }
 
-/* 
+
 .chat-typing{
     font-size: 12px;
     max-height: 0;
+    overflow: hidden;
     color: white;
     background-color: rgba(82, 83, 150, 0.496);
     border-radius: 10px;
@@ -401,7 +402,7 @@ body{
     max-height: 40px;
     padding: 0.2rem 2rem;
     bottom: 0;
-} */
+}
 
 .chat__footer{
     display: flex;
